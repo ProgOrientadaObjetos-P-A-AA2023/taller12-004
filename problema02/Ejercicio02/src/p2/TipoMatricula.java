@@ -5,8 +5,9 @@
  */
 package p2;
 
-import p1.MatriculaCampamento;
-import p1.MatriculaColegio;
+import java.util.ArrayList;
+import p1.Matricula;
+
 
 /**
  *
@@ -14,38 +15,47 @@ import p1.MatriculaColegio;
  */
 public class TipoMatricula {
     private double promedioMatriculas;
-    private MatriculaCampamento campamento;
-    private MatriculaColegio colegio;
-    // private MatriculaEscuela escuela;
-    // private MatriculaJardin jardin;
-    // private MatriculaMaternal maternal;
-    // private MatriculaMaternal maternal2;
-    
-    public void establecerMatriculaCampamento(MatriculaCampamento c){
-        campamento = c;
+    private ArrayList<Matricula> listaMatriculas;
+
+    public TipoMatricula(ArrayList<Matricula> ls) {
+        listaMatriculas = ls;
+    }
+
+    public ArrayList<Matricula> obtenerListaMatriculas() {
+        return listaMatriculas;
+    }
+
+    public void establecerListaMatriculas(ArrayList<Matricula> listaMatriculas) {
+        this.listaMatriculas = listaMatriculas;
     }
     
-    public void establecerMatriculaColegio(MatriculaColegio c){
-        colegio = c;
-    }
-    
-    public MatriculaCampamento obtenerMatriculaCampamento(){
-        return campamento;
-    }
-    
-    public MatriculaColegio obtenerMatriculaColegio(){
-        return colegio;
-    }
-    
-    public void establecerPromedioTarifas(){
-        promedioMatriculas = (obtenerMatriculaCampamento().obtenerTarifa() + 
-                obtenerMatriculaColegio().obtenerTarifa())/2;
+    public void establecerPromedioMatriculas(){
+        double suma = 0;
+        for (Matricula ls : listaMatriculas) {
+            suma += ls.obtenerTarifa();
+        }     
         
+        promedioMatriculas = suma/listaMatriculas.size();
     }
     
-    public double obtenerPromedioTarifas(){
+    public double obtenerPromedioMatriculas(){
         return promedioMatriculas;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        String m = "\t******Listado de Matriculas******\n";
+        for (Matricula ls : listaMatriculas) {
+            m = String.format("%s%s\n",
+                    m,
+                    ls);
+        }
+        
+        m = String.format("%s\nPromedio Matriculas: $%.2f\n",
+                m,
+                promedioMatriculas);
+        
+        return m;
+    }
+  
 }

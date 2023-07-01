@@ -9,16 +9,59 @@ package p1;
  *
  * @author reroes
  */
-public class MatriculaJardin {
-    private double tarifa;
-    
-        
-    public void establecerTarifa(){
-        // tarifa = costo desayunos + costo libros + costo paseos
-        tarifa = 50.2 + 140.2 + 40;
+public class MatriculaJardin extends Matricula {
+
+    private double costoDesayunos;
+    private double costolibros;
+    private double costoPaseos;
+
+    public MatriculaJardin(double cosotoD, double costoLib, double costoPas) {
+        costoDesayunos = cosotoD;
+        costolibros = costoLib;
+        costoPaseos = costoPas;
     }
-        
-    public double obtenerTarifa(){
-        return tarifa;
+
+    public double obtenerCostoDesayunos() {
+        return costoDesayunos;
+    }
+
+    public void establecerCostoDesayunos(double n) {
+        costoDesayunos = n;
+    }
+
+    public double obtenerCostolibros() {
+        return costolibros;
+    }
+
+    public void establecerCostolibros(double n) {
+        costolibros = n;
+    }
+
+    public double obtenerCostoPaseos() {
+        return costoPaseos;
+    }
+
+    public void establecerCostoPaseos(double n) {
+        costoPaseos = n;
+    }
+
+    @Override
+    public void establecerTarifa() {
+        tarifa = costoDesayunos + costolibros + costoPaseos;
+    }
+
+    @Override
+    public String toString() {
+        String m = String.format("=====Matricula Jardin=====\n"
+                + "  *Costo Desayunos: $%.2f\n"
+                + "  *Costo Libros: $%.2f\n"
+                + "  *Costo Paseo: $%.2f\n"
+                + "  *Tarifa: $%.2f\n\n",
+                costoDesayunos,
+                costolibros,
+                costoPaseos,
+                tarifa);
+
+        return m;
     }
 }
